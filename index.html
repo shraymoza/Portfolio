@@ -44,6 +44,17 @@
     .dark .nav-link-active::after {
       background-color: #818cf8;
     }
+    .blinking-cursor {
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      from, to {
+        color: transparent;
+      }
+      50% {
+        color: inherit;
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
@@ -76,7 +87,10 @@
       <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-300">
         Master's student at Dalhousie University specializing in Software Engineering, Cloud Systems, and AI Applications.
       </p>
-      <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+      <p class="mt-4 text-2xl md:text-3xl font-medium text-indigo-700 dark:text-indigo-300 h-10">
+        <span id="typing-text"></span><span class="blinking-cursor">|</span>
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
         <a href="#projects" class="w-full sm:w-auto bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-indigo-700 transition-transform transform hover:scale-105 flex items-center justify-center">
           Discover My Work
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
@@ -333,28 +347,28 @@
         link: "https://github.com/shraymoza/Human-and-AI-Text-Classifier"
       },
       {
-        image: "https://placehold.co/600x400/ef4444/ffffff?text=Mortality+Analysis",
+        image: "https://github.com/shraymoza/Portfolio/raw/main/mortalityrateanalysis.png",
         title: "Mortality Rate Analysis - ML & Time Series Insights",
         description: "A comprehensive data science project featuring advanced ML algorithms and interactive visualizations for analyzing global mortality patterns and detecting anomalies.",
         tags: ["Python", "Streamlit", "Scikit-learn", "TensorFlow", "SARIMA", "Plotly", "Jupyter Notebook", "LSTM"],
         link: "https://github.com/shraymoza/Mortality-Rate-Analysis"
       },
       {
-        image: "https://placehold.co/600x400/10b981/ffffff?text=DalScooter",
+        image: "https://github.com/shraymoza/Portfolio/raw/main/DALscooter.jpg",
         title: "DalScooter (Serverless E-Scooter Platform)",
         description: "A fully server-less platform on AWS using Lambda, DynamoDB, and Terraform for a scalable e-scooter rental service.",
         tags: ["AWS", "Serverless", "DynamoDB", "Terraform", "Cloud"],
         link: "https://github.com/shraymoza/DALScooter"
       },
       {
-        image: "https://placehold.co/600x400/3b82f6/ffffff?text=EventSparks",
+        image: "https://github.com/shraymoza/Portfolio/raw/main/EventSpark.png",
         title: "EventSparks (Event Booking Platform)",
         description: "A full-stack event management web application built from scratch, showcasing end-to-end web development and RESTful API experience.",
         tags: ["React", "Node.js", "MongoDB", "Express", "AWS S3"],
         link: "https://github.com/shraymoza/EventSpark"
       },
       {
-        image: "https://placehold.co/600x400/f97316/ffffff?text=Best3Deals",
+        image: "https://github.com/shraymoza/Portfolio/raw/main/Best3Deal.jpg",
         title: "Best3Deals (Product Aggregator)",
         description: "A mobile app that finds the best three deals for a product in your search radius using a web scraper and Google Products API.",
         tags: ["Kotlin", "Spring Boot", "Flutter", "MongoDB", "Mobile"],
@@ -399,6 +413,46 @@
 
 
     // --- INTERACTIVITY ---
+    // Typing Effect
+    const typingTextElement = document.getElementById('typing-text');
+    const phrases = ["Transforming Ideas into Reality.", "Full-Stack Innovation.", "AI-Powered Solutions."];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+      let text = '';
+
+      if (isDeleting) {
+        text = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        text = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      typingTextElement.textContent = text;
+
+      let typeSpeed = 150;
+      if (isDeleting) {
+        typeSpeed /= 2;
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        typeSpeed = 2000; // Pause at end of phrase
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500; // Pause before starting new phrase
+      }
+
+      setTimeout(type, typeSpeed);
+    }
+    type();
+
+
     // Theme Toggle
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');

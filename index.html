@@ -1,182 +1,452 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shray Moza Portfolio</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shray Moza | Software Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Custom Styles */
     body {
-      font-family: Arial, sans-serif;
-      padding-top: 70px;
+      font-family: 'Inter', sans-serif;
     }
-    .profile-img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
+    .gradient-bg {
+      background: linear-gradient(120deg, #f0f8ff 0%, #e6e6fa 100%);
     }
-    header {
-      background-color: #f8f9fa;
-      text-align: center;
-      padding: 60px 0;
+    .dark .gradient-bg {
+      background: linear-gradient(120deg, #1a202c 0%, #2d3748 100%);
     }
-    section {
-      padding: 60px 0;
+    .skill-card {
+      background-color: white;
+      border: 1px solid #e2e8f0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    footer {
-      background: #343a40;
-      color: #fff;
-      padding: 20px 0;
+    .dark .skill-card {
+      background-color: #2d3748;
+      border-color: #4a5568;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    .nav-link-active {
+      position: relative;
+    }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #4f46e5;
+    }
+    .dark .nav-link-active::after {
+      background-color: #818cf8;
     }
   </style>
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">Shray Moza</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-      <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-      <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-      <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-      <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
-      <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-      <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-    </ul>
+<!-- Header -->
+<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-md transition-colors duration-300">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Shray Moza</a>
+    <nav class="hidden md:flex items-center space-x-8">
+      <a href="#home" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium" data-section="home">Home</a>
+      <a href="#about" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium" data-section="about">About</a>
+      <a href="#skills" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium" data-section="skills">Skills</a>
+      <a href="#projects" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium" data-section="projects">Projects</a>
+      <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium" data-section="contact">Contact</a>
+    </nav>
+    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+      <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+      <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+    </button>
   </div>
-</nav>
-
-<!-- Hero Section -->
-<header>
-  <img src="profile_image.jpg" alt="Profile Image" class="profile-img">
-  <h1>SHRAY MOZA</h1>
-  <h3>SOFTWARE ENGINEER</h3>
-  <p>
-    Strategic Software Engineer skilled in application development, testing, and optimization. Excels at coordinating ground-up planning, programming, and implementation for core modules. Maintains strong object-oriented and software architecture fundamentals.
-  </p>
-  <a href="Resume New.pdf" class="btn btn-primary" download>Download Resume</a>
 </header>
 
-<!-- About Section -->
-<section id="about" class="container">
-  <h2>About Me</h2>
-  <p>
-    I am a dedicated Software Engineer with a passion for developing scalable and efficient solutions. With extensive experience in multiple programming languages and a commitment to innovation, I thrive in dynamic environments and excel at delivering high-quality software products.
-  </p>
-</section>
+<main>
+  <!-- Home Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center gradient-bg pt-20">
+    <div class="text-center px-6">
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-gray-900 dark:text-white">Shray Moza</h1>
+      <div class="w-16 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto my-6"></div>
+      <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-300">
+        Master's student at Dalhousie University specializing in Software Engineering, Cloud Systems, and AI Applications.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="#projects" class="w-full sm:w-auto bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-indigo-700 transition-transform transform hover:scale-105 flex items-center justify-center">
+          Discover My Work
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        </a>
+        <a href="./resume_M.pdf" target="_blank" class="w-full sm:w-auto bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 font-semibold py-3 px-8 rounded-lg shadow-lg border border-indigo-200 dark:border-gray-600 hover:bg-indigo-50 dark:hover:bg-gray-600 transition-transform transform hover:scale-105 flex items-center justify-center">
+          View Resume
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" /><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-<!-- Work Experience Section -->
-<section id="experience" class="container">
-  <h2>Work Experience</h2>
-  <div class="mb-5">
-    <h3>Software Engineer</h3>
-    <p><strong>Decimal Technologies Pvt. Ltd. | Delhi, India</strong></p>
-    <p><em>May 2022 - August 2024</em></p>
-    <ul>
-      <li>Deployed multiple apps for clients such as Kotak, HSBC, and HDFC on both the App Store and Play Store.</li>
-      <li>Analyzed user requirements to develop software solutions and created technical specifications.</li>
-      <li>Developed, tested, debugged, and documented software programs using Java, Flutter, Kotlin, Swift, and MySQL.</li>
-    </ul>
-  </div>
-  <div>
-    <h3>Associate Software Engineer</h3>
-    <p><strong>Decimal Technologies Pvt. Ltd. | Delhi, India</strong></p>
-    <p><em>August 2020 - May 2022</em></p>
-    <ul>
-      <li>Monitored system performance and troubleshot issues in production environments.</li>
-      <li>Collaborated with cross-functional teams to ensure quality assurance throughout the development process.</li>
-      <li>Created detailed design documents and release notes.</li>
-      <li>Integrated Firebase and handled REST APIs.</li>
-    </ul>
-  </div>
-</section>
+  <!-- About Section -->
+  <section id="about" class="py-20 md:py-32">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-4">About Me</h2>
+      <div class="w-16 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-12"></div>
+      <div class="max-w-4xl mx-auto text-left text-lg space-y-6 text-gray-700 dark:text-gray-300">
+        <p>
+          I am a dedicated graduate student at Dalhousie University, pursuing a Master of Science in Applied Computer Science. My focus lies in software development, system-level programming, AI applications, and innovative technical solutions. My expertise spans systems programming languages, full-stack development, and cloud technologies.
+        </p>
+        <p>
+          During my tenure at Decimal Technologies, I developed enterprise software solutions and data management systems, working with cross-functional teams to optimize performance and implement automated deployment processes. I have hands-on experience building scalable systems with real-time processing, secure authentication, and performance optimization that enhance user engagement and system efficiency.
+        </p>
+        <p>
+          I've architected diverse applications, from embedded systems to real-time processing pipelines and cloud-native microservices. My experience includes Linux system administration, hardware integration, and AI applications using TensorFlow, combining strong software engineering fundamentals with practical problem-solving across multiple domains.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<!-- Education Section -->
-<section id="education" class="container">
-  <h2>Education</h2>
-  <div class="mb-4">
-    <h3>Master of Science in Applied Computer Science</h3>
-    <p><strong>Dalhousie University</strong></p>
-    <p><em>September 2024 – April 2026</em></p>
-  </div>
-  <div>
-    <h3>Bachelor of Science in Computer Science</h3>
-    <p><strong>Bharati Vidyapeeth's College of Engineering, Delhi</strong></p>
-    <p><em>August 2016 – August 2020</em> | CGPA: 7.89</p>
-  </div>
-</section>
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 md:py-32 bg-gray-100 dark:bg-gray-800">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Skills & Expertise</h2>
+        <div class="w-16 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto"></div>
+        <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-600 dark:text-gray-400">
+          A comprehensive overview of my technical skills and professional competencies.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Skills Categories will be dynamically injected here by JS -->
+      </div>
+    </div>
+  </section>
 
-<!-- Skills Section -->
-<section id="skills" class="container">
-  <h2>Key Skills</h2>
-  <ul>
-    <li>Flutter and Dart</li>
-    <li>Java and Kotlin</li>
-    <li>Python, Pandas</li>
-    <li>Jenkins</li>
-    <li>MySQL</li>
-    <li>Git</li>
-    <li>Scikit, NLP toolkit, Text Blob</li>
-  </ul>
-</section>
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 md:py-32">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
+        <div class="w-16 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto"></div>
+        <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-600 dark:text-gray-400">
+          Explore my latest projects showcasing my skills in full-stack development, cloud technologies, and data science.
+        </p>
+      </div>
+      <div class="relative">
+        <div id="project-carousel" class="flex overflow-x-hidden snap-x snap-mandatory scroll-smooth">
+          <!-- Projects will be dynamically injected here by JS -->
+        </div>
+        <button id="prev-btn" class="absolute top-1/2 left-0 sm:-left-4 md:-left-8 transform -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button id="next-btn" class="absolute top-1/2 right-0 sm:-right-4 md:-right-8 transform -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
 
-<!-- Certifications Section -->
-<section id="certifications" class="container">
-  <h2>Certifications</h2>
-  <ul>
-    <li>Complete Python Bootcamp, Udemy, 08/2018</li>
-    <li>Introduction to Data Science in Python, Coursera, 03/2018</li>
-    <li>Applied Plotting, Charting & Data Representation in Python, Coursera, 05/2018</li>
-  </ul>
-</section>
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 md:py-32 bg-gray-100 dark:bg-gray-800">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+        <div class="w-16 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto"></div>
+        <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-600 dark:text-gray-400">
+          Have a question or want to collaborate? Feel free to reach out to me.
+        </p>
+      </div>
+      <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
+          <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+          <div class="space-y-6">
+            <div class="flex items-center space-x-4">
+              <div class="bg-indigo-100 dark:bg-indigo-900/50 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></div>
+              <div>
+                <h4 class="font-semibold text-lg">Email</h4>
+                <a href="mailto:shraya.moza@gmail.com" class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">shraya.moza@gmail.com</a>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="bg-indigo-100 dark:bg-indigo-900/50 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg></div>
+              <div>
+                <h4 class="font-semibold text-lg">Phone</h4>
+                <p class="text-gray-600 dark:text-gray-300">+1 (902) 809-3098</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="bg-indigo-100 dark:bg-indigo-900/50 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
+              <div>
+                <h4 class="font-semibold text-lg">Location</h4>
+                <p class="text-gray-600 dark:text-gray-300">Halifax, Nova Scotia, Canada</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-600">
+            <h4 class="font-semibold text-lg mb-4">Connect With Me</h4>
+            <div class="flex space-x-4">
+              <a href="https://github.com/shray-moza" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+              </a>
+              <a href="https://linkedin.com/in/shray-moza" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
+          <h3 class="text-2xl font-semibold mb-6">Send Me a Message</h3>
+          <form id="contact-form">
+            <div class="mb-4">
+              <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Name</label>
+              <input type="text" name="name" id="name" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Email</label>
+              <input type="email" name="email" id="email" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+              <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subject</label>
+              <input type="text" name="subject" id="subject" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-6">
+              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Message</label>
+              <textarea name="message" id="message" rows="4" class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-indigo-700 transition flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
+              Open Email Client
+            </button>
+          </form>
+          <div class="mt-4 text-center text-sm p-3 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 rounded-lg">
+            <strong>Tip:</strong> If the email client doesn't open automatically, please copy my email address and compose your message manually.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Projects Section -->
-<section id="projects" class="container">
-  <h2>Projects</h2>
-  <div class="mb-4">
-    <h3>Fake Review Detection</h3>
-    <p>
-      Implemented techniques on sentiment analysis to extract useful insights from customer reviews on product-based websites.
-    </p>
-  </div>
-  <div class="mb-4">
-    <h3>Cohesion Analysis</h3>
-    <p>
-      Enhanced email clustering performance using K-means and hierarchical clustering to assess cosine similarity among top words, evaluating semantic similarity across clusters.
-    </p>
-  </div>
-  <div>
-    <h3>Twitter Sentiment Analysis using Apache Pig</h3>
-    <p>
-      Conducted sentiment analysis on Twitter data using Apache Pig. Assigned ratings from +5 to -5 based on word meanings (using the AFINN dictionary), and calculated final sentiment scores for tweets.
-    </p>
-  </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="container">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:shraya.moza@gmail.com">shraya.moza@gmail.com</a></p>
-  <p>Phone: +1 902-809-3098</p>
-  <p>LinkedIn: <a href="https://www.linkedin.com/in/shray-moza-004580158/" target="_blank">View Profile</a></p>
-</section>
+</main>
 
 <!-- Footer -->
-<footer class="text-center">
-  <p>&copy; 2025 Shray Moza. All rights reserved.</p>
+<footer class="bg-white dark:bg-gray-900 py-6">
+  <div class="container mx-auto px-6 text-center text-gray-600 dark:text-gray-400">
+    <p>&copy; 2025 Shray Moza. All Rights Reserved.</p>
+  </div>
 </footer>
 
-<!-- Bootstrap JS, Popper.js, and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Scroll to top button -->
+<button id="scroll-to-top" class="fixed bottom-8 right-8 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-opacity opacity-0 hidden">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+</button>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // --- DATA ---
+    const skillsData = [
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
+        title: "Languages & OOP",
+        skills: ["Kotlin", "Java", "Dart", "JavaScript", "Python", "Swift", "C++", "TypeScript"]
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" /></svg>`,
+        title: "Frameworks & Libraries",
+        skills: ["React", "Flutter", "NodeJS", "Express", ".NET", "Vue", "Spring"]
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>`,
+        title: "Databases & Storage",
+        skills: ["SQL", "NoSQL", "PostgreSQL", "MongoDB", "DynamoDB"]
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6a2 2 0 100-4 2 2 0 000 4zm0 14a2 2 0 100-4 2 2 0 000 4zm6-8a2 2 0 100-4 2 2 0 000 4zm-12 0a2 2 0 100-4 2 2 0 000 4z" /></svg>`,
+        title: "Machine Learning",
+        skills: ["TensorFlow", "Scikit-learn", "Pandas", "NumPy", "Predictive Modeling", "Forecasting"]
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6" /></svg>`,
+        title: "Big Data & ETL",
+        skills: ["Apache Spark", "Hadoop", "ETL Pipelines", "Data Preprocessing", "Data Collection"]
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>`,
+        title: "Cloud & DevOps",
+        skills: ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "Git", "Agile Methodologies"]
+      }
+    ];
+
+    const projectsData = [
+      {
+        image: "https://placehold.co/600x400/6366f1/ffffff?text=AI+Text+Classifier",
+        title: "Human and AI-Text Classifier",
+        description: "A DistilBERT-based classifier trained on 10 million essays to distinguish between human and AI-generated text with 95% accuracy.",
+        tags: ["Machine Learning", "TensorFlow", "Scikit-learn", "Python"],
+        link: "#"
+      },
+      {
+        image: "https://placehold.co/600x400/10b981/ffffff?text=DalScooter",
+        title: "DalScooter (Serverless E-Scooter Platform)",
+        description: "A fully server-less platform on AWS using Lambda, DynamoDB, and Terraform for a scalable e-scooter rental service.",
+        tags: ["AWS", "Serverless", "DynamoDB", "Terraform", "Cloud"],
+        link: "#"
+      },
+      {
+        image: "https://placehold.co/600x400/3b82f6/ffffff?text=EventSparks",
+        title: "EventSparks (Event Booking Platform)",
+        description: "A full-stack event management web application built from scratch, showcasing end-to-end web development and RESTful API experience.",
+        tags: ["React", "Node.js", "MongoDB", "Express", "AWS S3"],
+        link: "#"
+      },
+      {
+        image: "https://placehold.co/600x400/f97316/ffffff?text=Best3Deals",
+        title: "Best3Deals (Product Aggregator)",
+        description: "A mobile app that finds the best three deals for a product in your search radius using a web scraper and Google Products API.",
+        tags: ["Kotlin", "Spring Boot", "Flutter", "MongoDB", "Mobile"],
+        link: "#"
+      }
+    ];
+
+
+    // --- DYNAMIC CONTENT INJECTION ---
+    const skillsContainer = document.querySelector('#skills .grid');
+    skillsContainer.innerHTML = skillsData.map(category => `
+        <div class="skill-card p-6 rounded-2xl shadow-sm">
+            <div class="flex items-center space-x-4 mb-4">
+                ${category.icon}
+                <h3 class="text-xl font-bold">${category.title}</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                ${category.skills.map(skill => `<span class="bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300 text-sm font-medium px-3 py-1 rounded-full">${skill}</span>`).join('')}
+            </div>
+        </div>
+    `).join('');
+
+    const projectCarousel = document.getElementById('project-carousel');
+    projectCarousel.innerHTML = projectsData.map(project => `
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4 snap-center">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden h-full flex flex-col group">
+                <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2">${project.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4 flex-grow">${project.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${project.tags.map(tag => `<span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-semibold px-2.5 py-1 rounded-full">${tag}</span>`).join('')}
+                    </div>
+                    <a href="${project.link}" target="_blank" class="mt-auto w-full text-center bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-semibold py-2 px-4 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900 transition flex items-center justify-center">
+                        View Details
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+
+    // --- INTERACTIVITY ---
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    } else {
+      themeToggleDarkIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (localStorage.getItem('color-theme')) {
+        if (localStorage.getItem('color-theme') === 'light') {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        }
+      } else {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        }
+      }
+    });
+
+    // Project Carousel
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const carousel = document.getElementById('project-carousel');
+
+    nextBtn.addEventListener('click', () => {
+      const slideWidth = carousel.querySelector('div').clientWidth;
+      carousel.scrollLeft += slideWidth;
+    });
+
+    prevBtn.addEventListener('click', () => {
+      const slideWidth = carousel.querySelector('div').clientWidth;
+      carousel.scrollLeft -= slideWidth;
+    });
+
+    // Contact Form
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      const mailtoLink = `mailto:shraya.moza@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message)}`;
+      window.location.href = mailtoLink;
+    });
+
+    // Active Nav Link on Scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const headerHeight = document.getElementById('header').offsetHeight;
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - headerHeight - 50;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('nav-link-active', 'text-indigo-600', 'dark:text-indigo-400');
+        if (link.dataset.section === current) {
+          link.classList.add('nav-link-active', 'text-indigo-600', 'dark:text-indigo-400');
+        }
+      });
+    });
+
+    // Scroll to Top Button
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.remove('hidden');
+        scrollToTopBtn.classList.add('opacity-100');
+      } else {
+        scrollToTopBtn.classList.add('hidden');
+        scrollToTopBtn.classList.remove('opacity-100');
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
 </body>
 </html>
